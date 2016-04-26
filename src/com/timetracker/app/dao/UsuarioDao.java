@@ -13,6 +13,12 @@ import java.sql.Statement;
  */
 public class UsuarioDao {
 	
+	/**
+	 * selecciona registro de la base de datos
+	 * @param idUsuario
+	 * @param passwUsuario
+	 * @return
+	 */
 	public UsuarioDto getUsuarioSesion(String idUsuario, String passwUsuario){
         UsuarioDto usuarioDto = new UsuarioDto();
         
@@ -39,4 +45,25 @@ public class UsuarioDao {
         
         return usuarioDto;
     }
+	
+	/**
+	 * Inserta registro en base de datos
+	 * @param usuario
+	 * @return
+	 */
+	public Boolean registroUsuario(UsuarioDto usuario){
+		ConexionBD conex= new ConexionBD();
+		
+		try{
+            String consulta = "INSERT INTO usuario (nombre,apellido,usuario_id,usuario_pass,rol) values ('"+
+                    usuario.getNombre()+"','"+usuario.getApellido()+"','"+usuario.getIdUsuario()+"',SHA1('"+usuario.getPassw()+"'),'"+
+            		usuario.getRolUsuario()+"');";
+            Statement st = conex.getConnection().createStatement();
+            st.executeUpdate(consulta);
+		}catch(SQLException e){
+            System.out.println("Error en la conexion "+e.getMessage());
+            return false;
+        }
+		return true;
+	}
 }

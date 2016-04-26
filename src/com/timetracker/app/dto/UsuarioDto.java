@@ -10,10 +10,17 @@ public class UsuarioDto {
 	private String idUsuario;
 	private String nombre;
     private String apellido;
+    private String passw;
     private String rolUsuario;
 	
     
-    public String getIdUsuario() {
+    public String getPassw() {
+		return passw;
+	}
+	public void setPassw(String passw) {
+		this.passw = passw;
+	}
+	public String getIdUsuario() {
 		return idUsuario;
 	}
 	public void setIdUsuario(String idUsuario) {

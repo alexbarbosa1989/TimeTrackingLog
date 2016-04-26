@@ -1,46 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Kendo UI Snippet</title>
-	<style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
-    <title></title>
-
-	<link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.common-bootstrap.min.css" />
-    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.default.min.css" />
-    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.mobile.all.min.css" />
-    
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2016.1.412/js/kendo.all.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2016.1.412/js/cultures/kendo.culture.es-ES.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2016.1.412/js/kendo.timezones.min.js"></script>
-</head>
-<body>
-<div id="example">
-    <div class="box wide">
-        <label for="language"></label>
-        <input id="language" value="es-ES" />
-    </div>
-
-    <div id="team-schedule">
-    </div>
-    <div id="scheduler"></div>
-</div>
-<script>
-  kendo.culture("es-ES");
-</script>
-<script>
-
-function changeLanguage() {
-    kendo.ui.progress($("#scheduler"), true);
-    var baseUrl = 'http://kendo.cdn.telerik.com/2016.1.412/js/messages/kendo.messages.';
-    $.getScript(baseUrl + this.value() + ".min.js", function () {
-        kendo.ui.progress($("#scheduler"), false);
-        createScheduler();
-    });
-}
-
 $(document).ready(function() {
+	kendo.culture("es-ES");
+	var app = new kendo.mobile.Application(document.body, { skin: "nova" });
     $("#language").kendoDropDownList({
         change: changeLanguage,
         dataTextField: "text",
@@ -52,6 +12,15 @@ $(document).ready(function() {
 
     $("#language").data("kendoDropDownList").trigger("change");
 });
+
+function changeLanguage() {
+    kendo.ui.progress($("#scheduler"), true);
+    var baseUrl = 'http://kendo.cdn.telerik.com/2016.1.412/js/messages/kendo.messages.';
+    $.getScript(baseUrl + this.value() + ".min.js", function () {
+        kendo.ui.progress($("#scheduler"), false);
+        createScheduler();
+    });
+}
 
 function createScheduler() {
     var element = $("#scheduler");
@@ -110,10 +79,3 @@ function createScheduler() {
 
     });
 }
-
-</script>
-<script>
-    var app = new kendo.mobile.Application(document.body, { skin: "nova" });
-</script>
-</body>
-</html>

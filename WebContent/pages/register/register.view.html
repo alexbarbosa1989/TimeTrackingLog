@@ -1,24 +1,25 @@
 <div class="col-md-6 col-md-offset-3">
+	<script type="text/javascript" src="resources/javascript/UserController.js"></script>
     <h2>Registro</h2>
-    <form name="form" ng-submit="vm.register()" role="form">
+    <form name="form" ng-controller="UserController" ng-submit="createUser()" >
         <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
             <label for="username">Nombre</label>
-            <input type="text" name="firstName" id="firstName" class="form-control" ng-model="vm.user.firstName" required />
-            <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">Primer Nombre es requerido</span>
+            <input type="text" name="firstName" id="firstName" class="form-control" ng-model="user.name" required />
+            <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">Nombre es requerido</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
             <label for="username">Apellido</label>
-            <input type="text" name="lastName" id="Text1" class="form-control" ng-model="vm.user.lastName" required />
+            <input type="text" name="lastName" id="Text1" class="form-control" ng-model="user.lastName" required />
             <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Apellido es requerido</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
             <label for="username">Correo Electrónico</label>
-            <input type="text" name="username" id="username" class="form-control" ng-model="vm.user.username" required />
+            <input type="text" name="username" id="username" class="form-control" ng-model="user.email" required />
             <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Correo Electrínico es requerido</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
             <label for="password">Contraseña</label>
-            <input type="password" name="password" id="password" class="form-control" ng-model="vm.user.password" required />
+            <input type="password" name="password" id="password" class="form-control" ng-model="user.password" required />
             <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Contraseña es requerida</span>
         </div>
         <div class="form-actions">

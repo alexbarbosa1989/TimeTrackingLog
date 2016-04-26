@@ -3,7 +3,7 @@ package com.timetracker.database.conn;
 import java.sql.*;
 
 /**
- * 
+ * Configura conexion a la base de datos
  * @author alexanderbarbosaayala
  *
  */
@@ -11,7 +11,7 @@ public class ConexionBD {
 	static String bd = "timetracker";
     static String login = "admin";
     static String passw = "admin01";
-    static String url = "jdbc:mysql://localhost/"+bd;
+    static String url = "jdbc:mysql://localhost:3306/"+bd;
     
     Connection connection = null;
     
