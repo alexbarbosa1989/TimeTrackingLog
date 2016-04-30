@@ -2,7 +2,6 @@ package com.timetracker.app.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,22 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.timetracker.app.dto.UsuarioDto;
 import com.timetracker.app.dao.UsuarioDao;
+import com.timetracker.app.dto.UsuarioDto;
 
 /**
- * Servlet implementation class registroUsuario
- * @author alexanderbarbosaayala
- *
+ * Servlet implementation class LoginUsuario
  */
-@WebServlet("/registroUsuario")
-public class RegistroUsuario extends HttpServlet {
+@WebServlet("/loginUsuario")
+public class LoginUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistroUsuario() {
+    public LoginUsuario() {
         super();
     }
 
@@ -52,37 +49,30 @@ public class RegistroUsuario extends HttpServlet {
 		try {
 			jObj = new JSONObject(stringBuilder.toString());
 			
-			setVariablesRegistro(jObj);
+			setVariablesLogin(jObj);
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-        
 	}
 	
 	/**
-	 * Setea valores traidos desde objeto Json del formulario en Objeto DTO y lanza consulta al DAO 
+	 * loeguea el usuario
 	 * @param obj
 	 */
-	private void setVariablesRegistro(JSONObject obj) {
-		try {
-			String nombre = obj.getString("name");
-			String apellido = obj.getString("lastName");
-			String correo = obj.getString("email");
-			String passw = obj.getString("password");
+	private void setVariablesLogin(JSONObject obj) {
+		try{
+			String idUsuario = obj.getString("usermail");
+			String passw = obj.getString("userpassw");
 			
 			UsuarioDto usuario = new UsuarioDto();
-			usuario.setNombre(nombre);
-			usuario.setApellido(apellido);
-			usuario.setIdUsuario(correo);
+			usuario.setIdUsuario(idUsuario);
 			usuario.setPassw(passw);
-			usuario.setRolUsuario("02");
 			
 			UsuarioDao usuarioDao = new UsuarioDao();
-			Boolean result = false;
-			result = usuarioDao.registroUsuario(usuario);
-			System.out.println("Resultado:"+result.toString());
-		} catch (JSONException e) {
+			usuario = usuarioDao.getUsuarioSesion(usuario);
+			System.out.println("Nombre usuario: "+usuario.getNombre());
+		} catch (JSONException e){
 			e.printStackTrace();
 		}
 		

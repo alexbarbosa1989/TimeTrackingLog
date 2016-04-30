@@ -19,15 +19,15 @@ public class UsuarioDao {
 	 * @param passwUsuario
 	 * @return
 	 */
-	public UsuarioDto getUsuarioSesion(String idUsuario, String passwUsuario){
-        UsuarioDto usuarioDto = new UsuarioDto();
+	public UsuarioDto getUsuarioSesion(UsuarioDto usuarioDto){
+		String idUsuario = usuarioDto.getIdUsuario();
+		String passwUsuario = usuarioDto.getPassw();
         
         ConexionBD conex= new ConexionBD();
      
         try {
-            int usuarioInt = Integer.parseInt(idUsuario);
-            String consulta = "SELECT * FROM usuario where usuario_id = "+usuarioInt+
-                    " and password = SHA1('"+passwUsuario+"');";
+            String consulta = "SELECT * FROM usuario where usuario_id = '"+idUsuario+
+                    "' and usuario_pass = SHA1('"+passwUsuario+"');";
             Statement st = conex.getConnection().createStatement();
             ResultSet rs = st.executeQuery(consulta);
             
