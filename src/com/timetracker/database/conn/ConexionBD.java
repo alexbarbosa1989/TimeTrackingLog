@@ -43,5 +43,21 @@ public class ConexionBD {
    public void desconectar(){
       connection = null;
    }
+   /*DATABASE CONFIG
+    * 
+    create table usuario(nombre varchar(50), 
+   						apellido varchar(50),usuario_id varchar(50),
+   						usuario_pass varchar(40),
+   						rol varchar(2));
+    alter table persona add primary key (id);
+
+    CREATE TABLE roles( rol_id VARCHAR(2)NOT NULL, 
+   						rol_descripcion VARCHAR(40) NOT NULL, PRIMARY KEY (rol_id) );
+
+	insert into roles (rol_id, rol_descripcion) values ('01','administrador');
+	insert into roles (rol_id, rol_descripcion) values ('02','empleado’);
+
+	alter table usuario add constraint fk_rol_id foreign key (rol) references roles(rol_id);
+    */
 
 }
