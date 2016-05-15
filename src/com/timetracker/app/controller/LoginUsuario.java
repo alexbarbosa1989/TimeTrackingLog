@@ -2,6 +2,8 @@ package com.timetracker.app.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,9 +41,11 @@ public class LoginUsuario extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 		StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferReader = request.getReader();
         String linea = null;
+        String usuarioLogin = null;
         while ((linea = bufferReader.readLine()) != null) {
         	stringBuilder.append(linea);
         }
@@ -49,32 +53,36 @@ public class LoginUsuario extends HttpServlet {
 		try {
 			jObj = new JSONObject(stringBuilder.toString());
 			
-			setVariablesLogin(jObj);
+			usuarioLogin =setVariablesLogin(jObj);
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		out.print(usuarioLogin);
 	}
 	
 	/**
 	 * loeguea el usuario
 	 * @param obj
 	 */
-	private void setVariablesLogin(JSONObject obj) {
+	private String setVariablesLogin(JSONObject obj) {
+		UsuarioDto usuario = new UsuarioDto();
 		try{
 			String idUsuario = obj.getString("usermail");
 			String passw = obj.getString("userpassw");
 			
-			UsuarioDto usuario = new UsuarioDto();
+			
 			usuario.setIdUsuario(idUsuario);
 			usuario.setPassw(passw);
 			
 			UsuarioDao usuarioDao = new UsuarioDao();
 			usuario = usuarioDao.getUsuarioSesion(usuario);
 			System.out.println("Nombre usuario: "+usuario.getNombre());
+				
 		} catch (JSONException e){
 			e.printStackTrace();
 		}
+		return usuario.getNombre();
 		
 	}
 
