@@ -2,6 +2,7 @@ package com.timetracker.app.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,9 +43,11 @@ public class RegistroUsuario extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 		StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferReader = request.getReader();
         String linea = null;
+        String respuesta = null;
         while ((linea = bufferReader.readLine()) != null) {
         	stringBuilder.append(linea);
         }
@@ -52,11 +55,12 @@ public class RegistroUsuario extends HttpServlet {
 		try {
 			jObj = new JSONObject(stringBuilder.toString());
 			
-			setVariablesRegistro(jObj);
+			respuesta = setVariablesRegistro(jObj);
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		out.print(respuesta);
         
 	}
 	
@@ -64,7 +68,8 @@ public class RegistroUsuario extends HttpServlet {
 	 * Setea valores traidos desde objeto Json del formulario en Objeto DTO y lanza consulta al DAO 
 	 * @param obj
 	 */
-	private void setVariablesRegistro(JSONObject obj) {
+	private String setVariablesRegistro(JSONObject obj) {
+		JSONObject rta = new JSONObject();
 		try {
 			String nombre = obj.getString("name");
 			String apellido = obj.getString("lastName");
@@ -81,10 +86,12 @@ public class RegistroUsuario extends HttpServlet {
 			UsuarioDao usuarioDao = new UsuarioDao();
 			Boolean result = false;
 			result = usuarioDao.registroUsuario(usuario);
-			System.out.println("Resultado:"+result.toString());
+//			System.out.println("Resultado:"+result.toString());
+			rta.put("success", true);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		return rta.toString();
 		
 	}
 
