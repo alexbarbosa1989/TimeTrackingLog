@@ -46,14 +46,16 @@ public class LoginUsuario extends HttpServlet {
         BufferedReader bufferReader = request.getReader();
         String linea = null;
         String usuarioLogin = null;
+        JSONObject jObj;
+        
         while ((linea = bufferReader.readLine()) != null) {
         	stringBuilder.append(linea);
         }
-        JSONObject jObj;
+        
 		try {
 			jObj = new JSONObject(stringBuilder.toString());
 			
-			usuarioLogin =setVariablesLogin(jObj);
+			usuarioLogin = setVariablesLogin(jObj);
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -67,6 +69,7 @@ public class LoginUsuario extends HttpServlet {
 	 */
 	private String setVariablesLogin(JSONObject obj) {
 		UsuarioDto usuario = new UsuarioDto();
+		String rtaUsuario = new String();
 		try{
 			String idUsuario = obj.getString("usermail");
 			String passw = obj.getString("userpassw");
@@ -77,13 +80,28 @@ public class LoginUsuario extends HttpServlet {
 			
 			UsuarioDao usuarioDao = new UsuarioDao();
 			usuario = usuarioDao.getUsuarioSesion(usuario);
-			System.out.println("Nombre usuario: "+usuario.getNombre());
-				
+//			System.out.println("Nombre usuario: "+usuario.getNombre());
+			//create response Object
+			rtaUsuario = setRespuesta(usuario).toString();
 		} catch (JSONException e){
 			e.printStackTrace();
 		}
-		return usuario.getNombre();
+		return rtaUsuario;
 		
+	}
+	
+	/**
+	 * genera el objeto JSON de respuesta
+	 * @param usr
+	 * @return
+	 * @throws JSONException
+	 */
+	private JSONObject setRespuesta(UsuarioDto usr) throws JSONException{
+		JSONObject obj = new JSONObject();
+		obj.put("username", usr.getNombre());
+		obj.put("userlastname", usr.getApellido());
+		obj.put("success", true);
+		return obj;
 	}
 
 }

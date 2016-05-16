@@ -163,12 +163,13 @@
 
         // private functions
 
-        function getUsers() {
-            if(!localStorage.users){
-                localStorage.users = JSON.stringify([]);
-            }
-
-            return JSON.parse(localStorage.users);
+        function getUsers(res) {
+//            if(!localStorage.users){
+//                localStorage.users = JSON.stringify([]);
+//            }
+//
+//            return JSON.parse(localStorage.users);
+        	return res.data;
         }
 
         function setUsers(users) {

@@ -15,26 +15,26 @@
 
         return service;
 
-        function Login(username, password, callback) {
+        function Login(userid, password, callback) {
         	 
         	    $http({
         	      method: 'POST',
         	      url: 'http://localhost:8080/TimeTracker/loginUsuario',
         	      headers: {'Content-Type': 'application/json'},
-        	      data:  { usermail: username, userpassw: password }
+        	      data:  { usermail: userid, userpassw: password }
         	    }).success(function (response){
-        	    	response = { success: true };
+        	    	//response = { success: true };
         	    	callback(response);
         	    });
 
         }
 
-        function SetCredentials(username, password) {
-            var authdata = Base64.encode(username + ':' + password);
+        function SetCredentials(response, password) {
+            var authdata = Base64.encode(response.name + ':' + password);
 
             $rootScope.globals = {
                 currentUser: {
-                    username: username,
+                    username: response.name,
                     authdata: authdata
                 }
             };
