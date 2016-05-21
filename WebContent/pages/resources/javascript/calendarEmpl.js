@@ -31,7 +31,7 @@ function createScheduler() {
     }
 
     element.kendoScheduler({
-        date: new Date("2016/04/19"),
+        date: new Date(Date.now()),
         startTime: new Date("2016/04/19 07:00 AM"),
         height: 600,
         views: [
