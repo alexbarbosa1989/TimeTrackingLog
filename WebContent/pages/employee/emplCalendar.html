@@ -1,33 +1,74 @@
+<!-- <!DOCTYPE html> -->
+<!-- <html> -->
+<!-- <head> -->
+<!--     <meta charset="utf-8"/> -->
+<!--     <title>Kendo UI Snippet</title> -->
+<!-- 	<style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style> -->
+<!--     <title></title> -->
+
+<!-- 	<link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.common-bootstrap.min.css" /> -->
+<!--     <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.default.min.css" /> -->
+<!--     <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.mobile.all.min.css" /> -->
+    
+<!--     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> -->
+<!--     <script src="http://kendo.cdn.telerik.com/2016.1.412/js/kendo.all.min.js"></script> -->
+<!--     <script src="http://kendo.cdn.telerik.com/2016.1.412/js/cultures/kendo.culture.es-ES.min.js"></script> -->
+<!--     <script src="http://kendo.cdn.telerik.com/2016.1.412/js/kendo.timezones.min.js"></script> -->
+<!-- </head> -->
+<!-- <body> -->
+
+
+<!-- <div id="cal_emp"> -->
+<!--     <div class="box wide"> -->
+<!--         <label for="language"></label> -->
+<!--         <input id="language" value="es-ES" /> -->
+<!--     </div> -->
+
+<!--     <div id="team-schedule"> -->
+<!--     </div> -->
+<!--     <div id="scheduler"></div> -->
+<!-- </div> -->
+<!-- <script src="../resources/javascript/calendarEmpl.js"></script> -->
+<!-- </body> -->
+<!-- </html> -->
+
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <title>Kendo UI Snippet</title>
-	<style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
+    <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
     <title></title>
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.common-bootstrap.min.css" />
+    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.bootstrap.min.css" />
 
-	<link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.common-bootstrap.min.css" />
-    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.default.min.css" />
-    <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.mobile.all.min.css" />
-    
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2016.1.412/js/kendo.all.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2016.1.412/js/cultures/kendo.culture.es-ES.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2016.1.412/js/kendo.timezones.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2016.1.412/js/angular.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2016.1.412/js/kendo.all.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2016.1.412/js/cultures/kendo.culture.es-ES.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2016.1.412/js/kendo.timezones.min.js"></script>
+    <script src="//kendo.cdn.telerik.com/2016.1.412/js/messages/kendo.messages.es-ES.min.js"></script>
+    <style>
+     .custom-event { 
+         color: #fff; 
+         text-shadow: 0 1px 0 #000; 
+     } 
+     .custom-all-day-event { 
+         text-align: center; 
+         text-transform: uppercase 
+     } 
+</style>
 </head>
 <body>
-
-
-<div id="cal_emp">
-    <div class="box wide">
-        <label for="language"></label>
-        <input id="language" value="es-ES" />
+<div id="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+        <div kendo-scheduler k-options="schedulerOptions">
+            <span k-event-template class='custom-event'>{{dataItem.title}}</span>
+            <div k-all-day-event-template class='custom-all-day-event'>{{dataItem.title}}</div>
+        </div>
     </div>
 
-    <div id="team-schedule">
-    </div>
-    <div id="scheduler"></div>
-</div>
+ 
 <script src="../resources/javascript/calendarEmpl.js"></script>
+</div>
+
 </body>
 </html>

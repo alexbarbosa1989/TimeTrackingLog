@@ -1,0 +1,86 @@
+<!-- <div class="col-md-6 col-md-offset-3">     -->
+<!--     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> -->
+<!--     <script src="http://kendo.cdn.telerik.com/2016.1.412/js/kendo.all.min.js"></script> -->
+<!--     <script src="http://kendo.cdn.telerik.com/2016.1.412/js/cultures/kendo.culture.es-ES.min.js"></script> -->
+<!--     <script src="http://kendo.cdn.telerik.com/2016.1.412/js/kendo.timezones.min.js"></script> -->
+<!-- <h4>Hola {{vm.username}}!</h4> -->
+<!-- <p>&nbsp;</p> -->
+<!-- <p><a href="#/login" class="btn btn-primary">Logout</a></p> -->
+<!-- </div> -->
+<!-- <div id="example"> -->
+<!-- <!-- <script src="../resources/javascript/calendarEmpl.js"></script> --> 
+<!-- 			<h4>Hola {{vm.username}}!</h4> -->
+<!-- 			<p>&nbsp;</p> -->
+<!-- 			<p><a href="#/login" class="btn btn-primary">Logout</a></p> -->
+
+<!-- <div id="example" ng-app="KendoDemos"> -->
+<!--     <div ng-controller="MyCtrl"> -->
+<!--         <div kendo-scheduler k-options="schedulerOptions"> -->
+<!--             <span k-event-template class='custom-event'>{{dataItem.title}}</span> -->
+<!--             <div k-all-day-event-template class='custom-all-day-event'>{{dataItem.title}}</div> -->
+<!--         </div> -->
+<!--     </div> -->
+
+<!-- </div> -->
+
+<!-- </div> -->
+
+<!-- <!DOCTYPE html> -->
+<!-- <html> -->
+<!-- <head> -->
+<!--     <meta charset="utf-8"/> -->
+<!--     <title>Kendo UI Snippet</title> -->
+<!-- 	<style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style> -->
+<!--     <title></title> -->
+
+<!-- 	<link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.common-bootstrap.min.css" /> -->
+<!--     <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.default.min.css" /> -->
+<!--     <link rel="stylesheet" href="//kendo.cdn.telerik.com/2016.1.412/styles/kendo.mobile.all.min.css" /> -->
+    
+<!--     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> -->
+<!--     <script src="http://kendo.cdn.telerik.com/2016.1.412/js/kendo.all.min.js"></script> -->
+<!--     <script src="http://kendo.cdn.telerik.com/2016.1.412/js/cultures/kendo.culture.es-ES.min.js"></script> -->
+<!--     <script src="http://kendo.cdn.telerik.com/2016.1.412/js/kendo.timezones.min.js"></script> -->
+<!-- </head> -->
+<!-- <body> -->
+<!-- <div id="example"> -->
+<!--     <div class="box wide"> -->
+<!--         <label for="language"></label> -->
+<!--         <input id="language" value="es-ES" /> -->
+        
+<!--        <h4>Hola {{vm.username}}!</h4> -->
+<!-- 		<p>&nbsp;</p> -->
+<!-- 		<p><a href="#/login" class="btn btn-primary">Logout</a></p> -->
+<!-- 		<p><a href="employee/emplCalendar.html" class="btn btn-primary">calendar</a></p> -->
+<!--     </div> -->
+
+<!--     <div id="team-schedule"> -->
+<!--     </div> -->
+<!--     <div id="scheduler"></div> -->
+<!-- </div> -->
+<!-- <script src="resources/javascript/calendarEmpl.js"></script> -->
+<!-- </body> -->
+<!-- </html> -->
+
+
+       
+		
+<div id="example" ng-app="KendoDemos">
+	    <h4>Hola {{vm.username}}!</h4>
+		<p>&nbsp;</p>
+		<p><a href="#/login" class="btn btn-primary">Logout</a></p>
+		<p><a href="employee/emplCalendar.html" class="btn btn-primary">calendar</a></p>
+		
+    <div ng-controller="MyCtrl">
+        <div kendo-scheduler k-options="schedulerOptions">
+            <span k-event-template class='custom-event'>{{dataItem.title}}</span>
+            <div k-all-day-event-template class='custom-all-day-event'>{{dataItem.title}}</div>
+        </div>
+    </div>
+
+ 
+</div>
+
+
+
+
