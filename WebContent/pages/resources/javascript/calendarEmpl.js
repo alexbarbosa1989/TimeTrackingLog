@@ -107,6 +107,7 @@
 
 angular.module("KendoDemos", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
 	kendo.culture("es-ES");
+    
     $scope.schedulerOptions = {
     		date: new Date(Date.now()),
             startTime: new Date("2016/04/19 07:00 AM"),

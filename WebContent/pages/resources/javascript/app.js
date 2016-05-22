@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngCookies'])
+        .module('app', ['ngRoute', 'ngCookies', 'kendo.directives'])
         .config(config)
         .run(run);
 
@@ -24,6 +24,12 @@
             .when('/register', {
                 controller: 'RegisterController',
                 templateUrl: 'register/register.view.html',
+                controllerAs: 'vm'
+            })
+            
+            .when('/calendar', {
+                controller: 'RegisterController',
+                templateUrl: 'employee/emplCalendar.html',
                 controllerAs: 'vm'
             })
 
