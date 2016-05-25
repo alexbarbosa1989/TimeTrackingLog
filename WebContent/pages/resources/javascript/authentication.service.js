@@ -35,6 +35,7 @@
             $rootScope.globals = {
                 currentUser: {
                     username: response.username,
+                    usermail: response.usermail,
                     authdata: authdata
                 }
             };

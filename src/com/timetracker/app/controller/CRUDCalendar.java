@@ -3,6 +3,7 @@ package com.timetracker.app.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,23 +11,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.timetracker.app.dao.UsuarioDao;
-import com.timetracker.app.dto.UsuarioDto;
+import com.timetracker.app.dao.CalendarDao;
+import com.timetracker.app.dto.CalendarDto;
 
 /**
- * Servlet implementation class LoginUsuario
+ * Servlet implementation class CRUDCalendar
  */
-@WebServlet("/loginUsuario")
-public class LoginUsuario extends HttpServlet {
+@WebServlet("/CRUDCalendar")
+public class CRUDCalendar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginUsuario() {
+    public CRUDCalendar() {
         super();
     }
 
@@ -45,7 +47,7 @@ public class LoginUsuario extends HttpServlet {
 		StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferReader = request.getReader();
         String linea = null;
-        String usuarioLogin = null;
+        String calendarUsr = null;
         JSONObject jObj;
         
         while ((linea = bufferReader.readLine()) != null) {
@@ -55,54 +57,32 @@ public class LoginUsuario extends HttpServlet {
 		try {
 			jObj = new JSONObject(stringBuilder.toString());
 			
-			usuarioLogin = setVariablesLogin(jObj);
+			calendarUsr = setOptionCalendar(jObj);
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		out.print(usuarioLogin);
+		out.print(calendarUsr);
 	}
 	
-	/**
-	 * loeguea el usuario
-	 * @param obj
-	 */
-	private String setVariablesLogin(JSONObject obj) {
-		UsuarioDto usuario = new UsuarioDto();
-		String rtaUsuario = new String();
-		try{
-			String idUsuario = obj.getString("usermail");
-			String passw = obj.getString("userpassw");
-			
-			
-			usuario.setIdUsuario(idUsuario);
-			usuario.setPassw(passw);
-			
-			UsuarioDao usuarioDao = new UsuarioDao();
-			usuario = usuarioDao.getUsuarioSesion(usuario);
-//			System.out.println("Nombre usuario: "+usuario.getNombre());
-			//create response Object
-			rtaUsuario = setRespuesta(usuario).toString();
-		} catch (JSONException e){
-			e.printStackTrace();
-		}
-		return rtaUsuario;
+	private String setOptionCalendar(JSONObject obj) throws JSONException{
+		String option = obj.getString("action");
+		String usermail = obj.getString("usermail");
 		
+		ArrayList<CalendarDto> calendarList = new ArrayList<CalendarDto>();
+		if (option.equalsIgnoreCase("read")){
+			calendarList = getCalendarUsr(usermail);
+		}
+		JSONArray arrCalendar = new JSONArray(calendarList);
+		return arrCalendar.toString();
 	}
 	
-	/**
-	 * genera el objeto JSON de respuesta
-	 * @param usr
-	 * @return
-	 * @throws JSONException
-	 */
-	private JSONObject setRespuesta(UsuarioDto usr) throws JSONException{
-		JSONObject obj = new JSONObject();
-		obj.put("username", usr.getNombre());
-		obj.put("userlastname", usr.getApellido());
-		obj.put("usermail", usr.getIdUsuario());
-		obj.put("success", true);
-		return obj;
+	private ArrayList<CalendarDto> getCalendarUsr(String usrId) {
+		ArrayList<CalendarDto> calendarList = new ArrayList<CalendarDto>();
+//		CalendarDao calendarDao = new CalendarDao(); 
+//		calendarList = calendarDao.getUserCalendar(usrId);
+//		
+		return calendarList;
 	}
 
 }

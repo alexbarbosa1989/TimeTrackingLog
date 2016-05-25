@@ -15,5 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="/Users/alexanderbarbosaayala/Documents/workspace/TimeTracker/WebContent/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar"/>
 	<classpathentry kind="lib" path="/Users/alexanderbarbosaayala/Documents/workspace/TimeTracker/WebContent/WEB-INF/lib/java-json.jar"/>
+	<classpathentry kind="lib" path="/Users/alexanderbarbosaayala/Documents/workspace/TimeTracker/WebContent/WEB-INF/lib/javax.ws.rs-api-2.0.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
