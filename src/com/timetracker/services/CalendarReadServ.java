@@ -25,7 +25,8 @@ public class CalendarReadServ {
 	   ArrayList<CalendarDto> calendarList = new ArrayList<CalendarDto>();
 	   calendarList = calendarDao.getUserCalendar("correo");
 	   JSONArray arrCalendar = new JSONArray(calendarList);
-	   String arrResponse = arrCalendar.toString().replace("\\\\", "\\");
-       return "callback("+arrResponse+")";
+	   String arrResp = arrCalendar.toString().replace("\\\\", "\\");
+	   String arrResponse = arrResp.replace("\"null\"", "null");
+       return arrResponse;
    }
 }

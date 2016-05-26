@@ -28,13 +28,13 @@ public class CalendarDao {
             
             while(rs.next()){
             	CalendarDto calendarSet = new CalendarDto();
-            	calendarSet.setTaskId(rs.getInt("TaskID"));
+            	calendarSet.setTaskID(rs.getInt("TaskID"));
             	calendarSet.setTitle(rs.getString("Title"));
             	calendarSet.setDescription(rs.getString("Description"));
             	if (rs.getString("StartTimezone")==null){
-            		calendarSet.setStartTimeZone("null");
+            		calendarSet.setStartTimezone("null");
             	}else{
-            		calendarSet.setStartTimeZone(rs.getString("StartTimezone"));
+            		calendarSet.setStartTimezone(rs.getString("StartTimezone"));
             	}
             	calendarSet.setStart("\\/Date("+rs.getString("Start")+")\\/");
             	calendarSet.setEnd("\\/Date("+rs.getString("End")+")\\/");

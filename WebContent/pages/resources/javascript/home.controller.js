@@ -43,7 +43,8 @@
                     transport: {
                         read: {
                             url: "http://localhost:8080/TimeTracker/rest/calendarReadServ/getCalendar",
-                            dataType: "jsonp"
+                            dataType: "json",
+                            type: "GET"
                         },
                         update: {
                             url: "http://demos.telerik.com/kendo-ui/service/tasks/update",

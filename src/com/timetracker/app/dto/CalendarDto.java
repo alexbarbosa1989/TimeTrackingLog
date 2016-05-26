@@ -7,17 +7,20 @@ package com.timetracker.app.dto;
  */
 public class CalendarDto {
 	private String usuarioId;
-	private int taskId;
-	private String title;
-	private String description;
-	private String startTimeZone;
-	private String start;
-	private String end;
-	private String endTimeZone;
-	private String recurrenceRule;
-	private String recurrenceId;
-	private String recurrenceException;
-	private Boolean isAllDay;
+	private int TaskID;
+	private String Title;
+	private String Description;
+	private String StartTimezone;
+	private String Start;
+	private String End;
+	private String EndTimeZone;
+	private String RecurrenceRule;
+	private String RecurrenceId;
+	private String RecurrenceException;
+	private Boolean IsAllDay;
+	
+	
+	
 	
 	public String getUsuarioId() {
 		return usuarioId;
@@ -25,71 +28,72 @@ public class CalendarDto {
 	public void setUsuarioId(String usuarioId) {
 		this.usuarioId = usuarioId;
 	}
-	public int getTaskId() {
-		return taskId;
+	public int getTaskID() {
+		return TaskID;
 	}
-	public void setTaskId(int taskId) {
-		this.taskId = taskId;
+	public void setTaskID(int taskID) {
+		TaskID = taskID;
 	}
 	public String getTitle() {
-		return title;
+		return Title;
 	}
 	public void setTitle(String title) {
-		this.title = title;
+		Title = title;
 	}
 	public String getDescription() {
-		return description;
+		return Description;
 	}
 	public void setDescription(String description) {
-		this.description = description;
+		Description = description;
 	}
-	public String getStartTimeZone() {
-		return startTimeZone;
+	public String getStartTimezone() {
+		return StartTimezone;
 	}
-	public void setStartTimeZone(String startTimeZone) {
-		this.startTimeZone = startTimeZone;
+	public void setStartTimezone(String startTimezone) {
+		StartTimezone = startTimezone;
 	}
 	public String getStart() {
-		return start;
+		return Start;
 	}
 	public void setStart(String start) {
-		this.start = start;
+		Start = start;
 	}
 	public String getEnd() {
-		return end;
+		return End;
 	}
 	public void setEnd(String end) {
-		this.end = end;
+		End = end;
 	}
 	public String getEndTimeZone() {
-		return endTimeZone;
+		return EndTimeZone;
 	}
 	public void setEndTimeZone(String endTimeZone) {
-		this.endTimeZone = endTimeZone;
+		EndTimeZone = endTimeZone;
 	}
 	public String getRecurrenceRule() {
-		return recurrenceRule;
+		return RecurrenceRule;
 	}
 	public void setRecurrenceRule(String recurrenceRule) {
-		this.recurrenceRule = recurrenceRule;
+		RecurrenceRule = recurrenceRule;
 	}
 	public String getRecurrenceId() {
-		return recurrenceId;
+		return RecurrenceId;
 	}
 	public void setRecurrenceId(String recurrenceId) {
-		this.recurrenceId = recurrenceId;
+		RecurrenceId = recurrenceId;
 	}
 	public String getRecurrenceException() {
-		return recurrenceException;
+		return RecurrenceException;
 	}
 	public void setRecurrenceException(String recurrenceException) {
-		this.recurrenceException = recurrenceException;
+		RecurrenceException = recurrenceException;
 	}
 	public Boolean getIsAllDay() {
-		return isAllDay;
+		return IsAllDay;
 	}
 	public void setIsAllDay(Boolean isAllDay) {
-		this.isAllDay = isAllDay;
+		IsAllDay = isAllDay;
 	}
+	
 	
 }
