@@ -2,12 +2,11 @@ package com.timetracker.services;
 
 import java.util.ArrayList;
 
-
+import javax.websocket.server.PathParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.json.JSONArray;
@@ -53,8 +52,6 @@ public class CalendarReadServ {
 	   PersonasTareaDto personaTarea = new PersonasTareaDto();
 	   ArrayList<PersonaDto> usuarioList = new ArrayList<PersonaDto>();
 	   ArrayList<ReporteDto> calendarList = new ArrayList<ReporteDto>();
-	   ArrayList<String> listRta = new ArrayList<String>();
-	   String arrResponse = new String();
 	   usuarioList = usuarioDao.geAlltUsr();
 	   
 		   
@@ -64,24 +61,18 @@ public class CalendarReadServ {
 	   }
 	   personaTarea.setPersonas_tarea(usuarioList);
 	   listaRTA.add(personaTarea);
-	   
-//		   JSONArray arrCalendar = new JSONArray(usuarioList);
-//		   arrResponse = arrCalendar.toString().replace("\"null\"", "null");
-//		   listRta.add(arrResponse);
-	   
-//       return "{ \"personas_tarea\":"+listRta.toString()+" }";
-		return listaRTA;
+	   return listaRTA;
 
    }
    
    
    @POST
-   @Path("getCalendarByUsr")
+   @Path("getCalendarByUsr/{param}")
    @Produces(MediaType.APPLICATION_JSON)
-   public String getCalendarByUsr(@QueryParam("id") String id){
+   public String getCalendarByUsr(@PathParam("param") String param){
 	   
 	   ArrayList<CalendarDto> calendarList = new ArrayList<CalendarDto>();
-	   calendarList = calendarDao.getUserCalendar(id);
+	   calendarList = calendarDao.getUserCalendar(param);
 	   JSONArray arrCalendar = new JSONArray(calendarList);
 	   String arrResp = arrCalendar.toString().replace("\\\\", "\\");
 	   String arrResponse = arrResp.replace("\"null\"", "null");
