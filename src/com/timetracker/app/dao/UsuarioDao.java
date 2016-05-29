@@ -80,6 +80,7 @@ public class UsuarioDao {
             ResultSet rs = st.executeQuery(consulta);
             
             while(rs.next()){
+            	usuarioDto = new PersonaDto(); 
             	usuarioDto.setId_persona(rs.getString("usuario_id"));
             	usuarioDto.setNombres_persona(rs.getString("nombre"));
             	usuarioDto.setApellidos_persona(rs.getString("apellido"));

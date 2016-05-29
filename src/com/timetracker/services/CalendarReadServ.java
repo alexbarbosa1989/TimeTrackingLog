@@ -16,6 +16,7 @@ import com.timetracker.app.dao.CalendarDao;
 import com.timetracker.app.dao.UsuarioDao;
 import com.timetracker.app.dto.CalendarDto;
 import com.timetracker.app.dto.PersonaDto;
+import com.timetracker.app.dto.PersonasTareaDto;
 import com.timetracker.app.dto.ReporteDto;
 
 
@@ -47,7 +48,9 @@ public class CalendarReadServ {
    @GET
    @Path("getCalEmployees")
    @Produces(MediaType.APPLICATION_JSON)
-   public String getCalendarEmployees(){
+   public ArrayList<PersonasTareaDto> getCalendarEmployees(){
+	   ArrayList<PersonasTareaDto> listaRTA = new ArrayList<PersonasTareaDto>();
+	   PersonasTareaDto personaTarea = new PersonasTareaDto();
 	   ArrayList<PersonaDto> usuarioList = new ArrayList<PersonaDto>();
 	   ArrayList<ReporteDto> calendarList = new ArrayList<ReporteDto>();
 	   ArrayList<String> listRta = new ArrayList<String>();
@@ -59,13 +62,16 @@ public class CalendarReadServ {
 		   calendarList = calendarDao.getReporteCalendar(usuarioList.get(i).getId_persona());
 		   usuarioList.get(i).setTareas(calendarList);
 	   }
-		   JSONArray arrCalendar = new JSONArray(usuarioList);
-		   arrResponse = arrCalendar.toString().replace("\"null\"", "null");
-		   listRta.add(arrResponse);
+	   personaTarea.setPersonas_tarea(usuarioList);
+	   listaRTA.add(personaTarea);
+	   
+//		   JSONArray arrCalendar = new JSONArray(usuarioList);
+//		   arrResponse = arrCalendar.toString().replace("\"null\"", "null");
+//		   listRta.add(arrResponse);
 	   
 //       return "{ \"personas_tarea\":"+listRta.toString()+" }";
-		 
-		 return listRta.toString();
+		return listaRTA;
+
    }
    
    

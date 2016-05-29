@@ -1,6 +1,5 @@
 package com.timetracker.app.dto;
 
-import java.util.ArrayList;
 
 public class ReporteDto {
 	private int id_tarea;
