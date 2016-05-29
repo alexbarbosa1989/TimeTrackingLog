@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 
 import com.timetracker.app.dto.CalendarDto;
+import com.timetracker.app.dto.ReporteDto;
 import com.timetracker.database.conn.ConexionBD;
 
 /**
@@ -59,6 +60,56 @@ public class CalendarDao {
             		calendarSet.setRecurrenceException(rs.getString("RecurrenceException"));
             	}
             	calendarSet.setIsAllDay(Boolean.parseBoolean(rs.getString("IsAllDay")));
+            	
+            	calendarList.add(calendarSet);
+            }
+        }catch(NumberFormatException e){
+            System.out.println("Error de numero "+e.getMessage());
+        }catch(SQLException e){
+            System.out.println("Error en la conexion "+e.getMessage());
+        }
+        
+        return calendarList;
+    }
+
+	
+	
+	public ArrayList<ReporteDto> getReporteCalendar(String idUsuario) {
+		ArrayList<ReporteDto> calendarList = new ArrayList<ReporteDto>();
+		String descripcionAct = new String();
+        
+        ConexionBD conex= new ConexionBD();
+     
+        try {
+            String consulta = "select c.TaskID,c.Title,c.Description,c.start,c.end from calendar c "
+            		+ " where c.usuario_id = '"+idUsuario+"';";
+            Statement st = conex.getConnection().createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            
+            while(rs.next()){
+            	ReporteDto calendarSet = new ReporteDto();
+            	calendarSet.setId_tarea(rs.getInt("TaskID"));
+            	calendarSet.setNombre_tarea(rs.getString("Title"));
+            	calendarSet.setFecha_inicio(rs.getString("Start"));
+            	calendarSet.setFecha_fin(rs.getString("End"));
+            	
+            	descripcionAct = rs.getString("Description");
+            	
+            	if(descripcionAct.toLowerCase().contains("no urgente")){
+            		calendarSet.setUrgente("n");
+            	} else if(descripcionAct.toLowerCase().contains("urgente")){
+            		calendarSet.setUrgente("y");
+            	}else{
+            		calendarSet.setUrgente("null");
+            	}
+            	
+            	if(descripcionAct.toLowerCase().contains("no importante")){
+            		calendarSet.setImportante("n");
+            	} else if(descripcionAct.toLowerCase().contains("importante")){
+            		calendarSet.setImportante("y");
+            	} else{
+            		calendarSet.setImportante("null");
+            	}
             	
             	calendarList.add(calendarSet);
             }

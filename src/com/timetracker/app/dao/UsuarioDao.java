@@ -1,10 +1,12 @@
 package com.timetracker.app.dao;
 
+import com.timetracker.app.dto.PersonaDto;
 import com.timetracker.app.dto.UsuarioDto;
 import com.timetracker.database.conn.ConexionBD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * 
@@ -65,5 +67,32 @@ public class UsuarioDao {
             return false;
         }
 		return true;
+	}
+	
+	public ArrayList<PersonaDto> geAlltUsr(){
+		PersonaDto usuarioDto = new PersonaDto();
+        ConexionBD conex= new ConexionBD();
+        ArrayList<PersonaDto> usuariolist = new ArrayList<PersonaDto>();
+     
+        try {
+            String consulta = "SELECT distinct u.* from usuario u, calendar c where c.usuario_id=u.usuario_id;";
+            Statement st = conex.getConnection().createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            
+            while(rs.next()){
+            	usuarioDto.setId_persona(rs.getString("usuario_id"));
+            	usuarioDto.setNombres_persona(rs.getString("nombre"));
+            	usuarioDto.setApellidos_persona(rs.getString("apellido"));
+            	
+            	usuariolist.add(usuarioDto);
+            }
+        }catch(NumberFormatException e){
+            System.out.println("Error de numero "+e.getMessage());
+        }catch(SQLException e){
+            System.out.println("Error en la conexion "+e.getMessage());
+        }
+        
+        return usuariolist;
+		
 	}
 }

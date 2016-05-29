@@ -1,5 +1,6 @@
 package com.timetracker.app.dto;
 
+import java.util.ArrayList;
 
 /**
  * 
@@ -12,6 +13,7 @@ public class UsuarioDto {
     private String apellido;
     private String passw;
     private String rolUsuario;
+    
 	
     
     public String getPassw() {
@@ -44,4 +46,5 @@ public class UsuarioDto {
 	public void setRolUsuario(String rolUsuario) {
 		this.rolUsuario = rolUsuario;
 	}
+	
 }

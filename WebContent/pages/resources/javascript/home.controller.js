@@ -47,21 +47,23 @@
                             type: "GET"
                         },
                         update: {
-                            url: "http://demos.telerik.com/kendo-ui/service/tasks/update",
+                            url: "http://localhost:8080/TimeTracker/rest/calendarReadServ/setModify",
                             dataType: "jsonp"
                         },
                         create: {
-                            url: "http://demos.telerik.com/kendo-ui/service/tasks/create",
+                            url: "http://localhost:8080/TimeTracker/rest/calendarReadServ/setModify",
                             dataType: "jsonp"
                         },
                         destroy: {
-                            url: "http://demos.telerik.com/kendo-ui/service/tasks/destroy",
+                            url: "http://localhost:8080/TimeTracker/rest/calendarReadServ/setModify",
                             dataType: "jsonp"
                         },
                         parameterMap: function(options, operation) {
                             if (operation !== "read" && options.models) {
                             	if (operation == "create"){
                             		createTask(options.models);
+                            	}else if(operation == "update"){
+                            		updateTask(options.models);
                             	}else{
                                     return {models: kendo.stringify(options.models)};
                             	}
@@ -103,13 +105,24 @@
 //        	    	callback(response);
 //        	    });
 //        }
+    
+    	//CRUD TASKS
+        
+        function createTask(data){
+        	data[0].start =	Date.parse(data[0].start);
+        	data[0].end =	Date.parse(data[0].end);
+      	  	return data;
+        }
+        
+        
+        function updateTask(data){
+        	data[0].start =	Date.parse(data[0].start);
+        	data[0].end =	Date.parse(data[0].end);
+      	  	return data;
+        }
     }
     
-    //CRUD TASKS
     
-    function createTask(data){
-  	  return data;
-    }
     
 
 })();
