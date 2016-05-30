@@ -56,6 +56,8 @@
                             		createTask(options.models);
                             	}else if(operation == "update"){
                             		updateTask(options.models);
+                            	}else if(operation == "destroy"){
+                            		destroyTask(options.models);
                             	}else{
                                     return {models: kendo.stringify(options.models)};
                             	}
@@ -137,6 +139,34 @@
 	      	    		 end: end,
 	      	    		 isAllDay: data[0].isAllDay,
 	      	    		 action: "update" }
+	      	  }).success(function (response){
+	      	      //response = { success: true };
+	      		  $route.reload();
+	      	      //return true;
+	      	  });
+        }
+        
+        function destroyTask(data){
+        	var start;
+        	var end;
+        	var taskId;
+        	data[0].start =	Date.parse(data[0].start);
+        	data[0].end =	Date.parse(data[0].end);
+        	start = data[0].start + '';
+        	end = data[0].end + '';
+        	taskId = data[0].taskID + '';
+      	    $http({
+      	    	method: 'POST',
+	      	    url: 'http://localhost:8080/TimeTracker/CRUDCalendar',
+	      	    headers: {'Content-Type': 'application/json'},
+	      	    data:  { usermail: vm.usermail,
+	      	    		 taskId : taskId,
+	      	    	     description: data[0].description,
+	      	    		 title: data[0].title,
+	      	    		 start: start,
+	      	    		 end: end,
+	      	    		 isAllDay: data[0].isAllDay,
+	      	    		 action: "destroy" }
 	      	  }).success(function (response){
 	      	      //response = { success: true };
 	      		  $route.reload();

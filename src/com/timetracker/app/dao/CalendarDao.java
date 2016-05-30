@@ -172,4 +172,19 @@ public class CalendarDao {
 		return true;
 	}
 	
+	public Boolean setDeleteActivity(CalendarDto calendarDto){
+		ConexionBD conex= new ConexionBD();		
+		try{
+
+            String delete = "delete from calendar where TaskID = "+calendarDto.getTaskID()+" and "
+            		        + "usuario_id='"+calendarDto.getUsuarioId()+"';";
+            Statement sts = conex.getConnection().createStatement();
+            sts.executeUpdate(delete);
+		}catch(SQLException e){
+            System.out.println("Error en la conexion "+e.getMessage());
+            return false;
+        }
+		return true;
+	}
+	
 }

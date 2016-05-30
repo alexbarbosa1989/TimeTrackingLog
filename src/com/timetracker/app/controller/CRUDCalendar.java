@@ -98,6 +98,10 @@ public class CRUDCalendar extends HttpServlet {
 			Integer taskId = Integer.parseInt(obj.getString("taskId"));
 			calendardto.setTaskID(taskId);
 			result = calendarDao.setUpdateActivity(calendardto);
+		}else if(option.equalsIgnoreCase("destroy")){
+			Integer taskId = Integer.parseInt(obj.getString("taskId"));
+			calendardto.setTaskID(taskId);
+			result = calendarDao.setDeleteActivity(calendardto); 
 		}
 		return result;
 	}
