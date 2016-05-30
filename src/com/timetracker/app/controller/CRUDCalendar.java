@@ -44,10 +44,11 @@ public class CRUDCalendar extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
+		JSONObject rta = new JSONObject();
 		StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferReader = request.getReader();
         String linea = null;
-        String calendarUsr = null;
+        Boolean calendarRta = null;
         JSONObject jObj;
         
         while ((linea = bufferReader.readLine()) != null) {
@@ -57,32 +58,50 @@ public class CRUDCalendar extends HttpServlet {
 		try {
 			jObj = new JSONObject(stringBuilder.toString());
 			
-			calendarUsr = setOptionCalendar(jObj);
+			calendarRta = setOptionCalendar(jObj);
+			
+			if (calendarRta){
+				rta.put("success", true);
+			}else{
+				rta.put("success", false);
+			}
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		out.print(calendarUsr);
+		out.print(rta.toString());
 	}
 	
-	private String setOptionCalendar(JSONObject obj) throws JSONException{
+
+	private Boolean setOptionCalendar(JSONObject obj) throws JSONException{
+		CalendarDao calendarDao = new CalendarDao();
 		String option = obj.getString("action");
 		String usermail = obj.getString("usermail");
+		String title = obj.getString("title");
+		String description = obj.getString("description");
+		String start = obj.getString("start");
+		String end = obj.getString("end");
+		Boolean isAllDay = obj.getBoolean("isAllDay");
+		Boolean result = false;
 		
-		ArrayList<CalendarDto> calendarList = new ArrayList<CalendarDto>();
-		if (option.equalsIgnoreCase("read")){
-			calendarList = getCalendarUsr(usermail);
+		CalendarDto calendardto = new CalendarDto();
+		calendardto.setUsuarioId(usermail);
+		calendardto.setTitle(title);
+		calendardto.setDescription(description);
+		calendardto.setIsAllDay(isAllDay);
+		calendardto.setStart(start);
+		calendardto.setEnd(end);
+		
+		if (option.equalsIgnoreCase("create")){
+			result = calendarDao.setActivity(calendardto);
+		}else if(option.equalsIgnoreCase("update")){
+			Integer taskId = Integer.parseInt(obj.getString("taskId"));
+			calendardto.setTaskID(taskId);
+			result = calendarDao.setUpdateActivity(calendardto);
 		}
-		JSONArray arrCalendar = new JSONArray(calendarList);
-		return arrCalendar.toString();
+		return result;
 	}
 	
-	private ArrayList<CalendarDto> getCalendarUsr(String usrId) {
-		ArrayList<CalendarDto> calendarList = new ArrayList<CalendarDto>();
-//		CalendarDao calendarDao = new CalendarDao(); 
-//		calendarList = calendarDao.getUserCalendar(usrId);
-//		
-		return calendarList;
-	}
+
 
 }

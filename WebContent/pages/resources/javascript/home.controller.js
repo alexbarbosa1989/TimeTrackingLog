@@ -6,8 +6,8 @@
         .controller('HomeController', HomeController);
 
 
-    HomeController.$inject = ['UserService', '$rootScope', '$http'];
-    function HomeController(UserService, $rootScope, $http) {
+    HomeController.$inject = ['UserService', '$rootScope', '$http', '$route'];
+    function HomeController($UserService, $rootScope, $http, $route) {
 
         var vm = this;
         var jsonRead;
@@ -18,18 +18,10 @@
         
         
     	kendo.culture("es-ES");
-//    	readCalendar(vm.usermail, function (response) {
-//            if (response != null) {
-//            	jsonRead = response;	
-//            	
-//            } else {
-//                FlashService.Error(response.message);
-//                vm.dataLoading = false;
-//            }
-//        });
+    	var url = "http://localhost:8080/TimeTracker/rest/calendarReadServ/getCalendarByUsr/"+vm.usermail;
     	$rootScope.schedulerOptions = {
         		date: new Date(Date.now()),
-                startTime: new Date("2016/04/19 07:00 AM"),
+                startTime: new Date("2016/05/19 06:00 AM"),
                 height: 600,
                 views: [
                     "day",
@@ -42,7 +34,7 @@
                     batch: true, // Enable batch updates
                     transport: {
                         read: {
-                            url: "http://localhost:8080/TimeTracker/rest/calendarReadServ/getCalendar",
+                            url: url,
                             dataType: "json",
                             type: "GET"
                         },
@@ -76,7 +68,7 @@
                             fields: {
                                 // Describe the scheduler event fields and map them to the fields returned by the remote service
                                 taskId: {
-                                    from: "taskId", // The 'TaskID' server-side field is mapped to the 'taskId' client-side field
+                                    from: "taskID", // The 'TaskID' server-side field is mapped to the 'taskId' client-side field
                                     type: "number"
                                 },
                                 title: { from: "title", defaultValue: "No title", validation: { required: true } },
@@ -94,31 +86,62 @@
         };
         
         
-//        function readCalendar(usermail, callback){
-//        	$http({
-//        	      method: 'POST',
-//        	      url: 'http://localhost:8080/TimeTracker/CRUDCalendar',
-//        	      headers: {'Content-Type': 'application/json'},
-//        	      data:  { usermail: usermail, action: "read" }
-//        	    }).success(function (response){
-//        	    	//response = { success: true };
-//        	    	callback(response);
-//        	    });
-//        }
+
     
     	//CRUD TASKS
         
         function createTask(data){
+        	var start;
+        	var end;
         	data[0].start =	Date.parse(data[0].start);
         	data[0].end =	Date.parse(data[0].end);
-      	  	return data;
-        }
+        	start = data[0].start + '';
+        	end = data[0].end + '';
+      	    $http({
+      	    	method: 'POST',
+	      	    url: 'http://localhost:8080/TimeTracker/CRUDCalendar',
+	      	    headers: {'Content-Type': 'application/json'},
+	      	    data:  { usermail: vm.usermail,
+	      	    	     description: data[0].description,
+	      	    		 title: data[0].title,
+	      	    		 start: start,
+	      	    		 end: end,
+	      	    		 isAllDay: data[0].isAllDay,
+	      	    		 action: "create" }
+	      	  }).success(function (response){
+	      	      //response = { success: true };
+	      		  $route.reload();
+	      	      //return true;
+	      	  });
+        } 
         
         
         function updateTask(data){
+        	var start;
+        	var end;
+        	var taskId;
         	data[0].start =	Date.parse(data[0].start);
         	data[0].end =	Date.parse(data[0].end);
-      	  	return data;
+        	start = data[0].start + '';
+        	end = data[0].end + '';
+        	taskId = data[0].taskID + '';
+      	    $http({
+      	    	method: 'POST',
+	      	    url: 'http://localhost:8080/TimeTracker/CRUDCalendar',
+	      	    headers: {'Content-Type': 'application/json'},
+	      	    data:  { usermail: vm.usermail,
+	      	    		 taskId : taskId,
+	      	    	     description: data[0].description,
+	      	    		 title: data[0].title,
+	      	    		 start: start,
+	      	    		 end: end,
+	      	    		 isAllDay: data[0].isAllDay,
+	      	    		 action: "update" }
+	      	  }).success(function (response){
+	      	      //response = { success: true };
+	      		  $route.reload();
+	      	      //return true;
+	      	  });
         }
     }
     

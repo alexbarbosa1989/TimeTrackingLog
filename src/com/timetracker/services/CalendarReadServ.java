@@ -2,10 +2,9 @@ package com.timetracker.services;
 
 import java.util.ArrayList;
 
-import javax.websocket.server.PathParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -66,10 +65,10 @@ public class CalendarReadServ {
    }
    
    
-   @POST
-   @Path("getCalendarByUsr/{param}")
+   @GET
+   @Path("/getCalendarByUsr/{param}")
    @Produces(MediaType.APPLICATION_JSON)
-   public String getCalendarByUsr(@PathParam("param") String param){
+   public String getCalendarBsyUsr(@PathParam("param") String param){
 	   
 	   ArrayList<CalendarDto> calendarList = new ArrayList<CalendarDto>();
 	   calendarList = calendarDao.getUserCalendar(param);

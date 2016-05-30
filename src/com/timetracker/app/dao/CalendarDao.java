@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.timetracker.app.dto.CalendarDto;
 import com.timetracker.app.dto.ReporteDto;
+import com.timetracker.app.dto.UsuarioDto;
 import com.timetracker.database.conn.ConexionBD;
 
 /**
@@ -121,5 +122,54 @@ public class CalendarDao {
         
         return calendarList;
     }
+	
+	/*
+	 * calendar(usuario_id,TaskID,Title,Description,StartTimezone,Start,End,EndTimezone,RecurrenceRule,RecurrenceID,
+	 * RecurrenceException,IsAllDay) values('correo',1,'TareaDB 1','Tarea DB map',null,'1464030000000','1464037200000',
+	 * null,null,null,null,'false');
+	 */
+	
+	public Boolean setActivity(CalendarDto calendarDto){
+		ConexionBD conex= new ConexionBD();
+		//busca el maximo id de tarea
+	    int id = 0;    
+		
+		try{
+			String consulta = "select max(TaskID) from calendar; ";
+            Statement st = conex.getConnection().createStatement();
+            ResultSet rs = st.executeQuery(consulta);
+            while(rs.next()){
+            	id = rs.getInt("max(TaskID)");
+            }
+            
+			id = id + 1;
+			calendarDto.setTaskID(id);
+            String insert = "INSERT INTO calendar (usuario_id,TaskID,Title,Description,Start,End,IsAllDay) values ('"+
+            		calendarDto.getUsuarioId()+"',"+calendarDto.getTaskID()+",'"+calendarDto.getTitle()+"','"+calendarDto.getDescription()+"','"+calendarDto.getStart()+"','"+
+            		calendarDto.getEnd()+"','"+calendarDto.getIsAllDay()+"');";
+            Statement sts = conex.getConnection().createStatement();
+            sts.executeUpdate(insert);
+		}catch(SQLException e){
+            System.out.println("Error en la conexion "+e.getMessage());
+            return false;
+        }
+		return true;
+	}
+	
+	public Boolean setUpdateActivity(CalendarDto calendarDto){
+		ConexionBD conex= new ConexionBD();		
+		try{
+
+            String update = "Update calendar set Title='"+calendarDto.getTitle()+"',Description='"+calendarDto.getDescription()+
+            		        "',Start='"+calendarDto.getStart()+"',End='"+calendarDto.getEnd()+"',IsAllDay='"+calendarDto.getIsAllDay()+
+            		        "' where usuario_id='"+calendarDto.getUsuarioId()+"' and TaskID="+calendarDto.getTaskID()+";";
+            Statement sts = conex.getConnection().createStatement();
+            sts.executeUpdate(update);
+		}catch(SQLException e){
+            System.out.println("Error en la conexion "+e.getMessage());
+            return false;
+        }
+		return true;
+	}
 	
 }
