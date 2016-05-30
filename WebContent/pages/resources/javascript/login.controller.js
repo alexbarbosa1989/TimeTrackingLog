@@ -23,7 +23,7 @@
                     AuthenticationService.SetCredentials(response, vm.password);
                     $location.path('/');
                 } else {
-                    FlashService.Error(response.message);
+                    FlashService.Error("Error, por favor validar sus datos de acceso");
                     vm.dataLoading = false;
                 }
             });

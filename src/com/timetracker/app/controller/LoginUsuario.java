@@ -98,10 +98,15 @@ public class LoginUsuario extends HttpServlet {
 	 */
 	private JSONObject setRespuesta(UsuarioDto usr) throws JSONException{
 		JSONObject obj = new JSONObject();
-		obj.put("username", usr.getNombre());
-		obj.put("userlastname", usr.getApellido());
-		obj.put("usermail", usr.getIdUsuario());
-		obj.put("success", true);
+		if (usr.getNombre() == null){
+			obj.put("success", false);
+		}else{
+			obj.put("username", usr.getNombre());
+			obj.put("userlastname", usr.getApellido());
+			obj.put("usermail", usr.getIdUsuario());
+			obj.put("success", true);
+		}
+		
 		return obj;
 	}
 

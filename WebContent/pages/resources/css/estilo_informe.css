@@ -48,6 +48,22 @@
     font-weight: bold;
 }
 #contenido {
-    background-color: darkseagreen;
+    background-color: #EEE;
     text-align: center;
+}
+#cuadro{
+	background-color: #EEE;
+	height: 1000px;;
+}
+.button {
+    background-color: #456C8E;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }

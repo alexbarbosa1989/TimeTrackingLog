@@ -5,8 +5,8 @@
         .module('app')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService','$http'];
-    function RegisterController(UserService, $location, $rootScope, FlashService, $http) {
+    RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService','$http','$route'];
+    function RegisterController(UserService, $location, $rootScope, FlashService, $http, $route) {
         var vm = this;
 
         vm.register = register;
@@ -23,13 +23,16 @@
 //                        vm.dataLoading = false;
 //                    }
 //                });
-            
+            if(vm.email.indexOf('@') == -1){
+              alert("Correo Invalido");
+              $route.reload();
+            }
             CreateUser(vm, function (response) {
                 if (response.success) {
                 	FlashService.Success('Registro completo', true);
                     $location.path('/login');
                 } else {
-                    FlashService.Error(response.message);
+                    FlashService.Error("Registro Invalido");
                     vm.dataLoading = false;
                 }
             });
