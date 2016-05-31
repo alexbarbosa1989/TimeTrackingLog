@@ -6,8 +6,8 @@
         .controller('HomeController', HomeController);
 
 
-    HomeController.$inject = ['UserService', '$rootScope', '$http', '$route'];
-    function HomeController($UserService, $rootScope, $http, $route) {
+    HomeController.$inject = ['UserService', '$rootScope', '$http', '$route','$scope'];
+    function HomeController($UserService, $rootScope, $http, $route, $scope) {
 
         var vm = this;
         var jsonRead;
@@ -15,6 +15,9 @@
         vm.username = $rootScope.globals.currentUser.username;
         vm.usermail = $rootScope.globals.currentUser.usermail;
         
+        if(vm.usermail == 'admin@gmail.com'){
+        	$scope.adminButton = true;
+        }
         
         
     	kendo.culture("es-ES");

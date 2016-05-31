@@ -23,16 +23,12 @@
 //                        vm.dataLoading = false;
 //                    }
 //                });
-            if(vm.email.indexOf('@') == -1){
-              alert("Correo Invalido");
-              $route.reload();
-            }
             CreateUser(vm, function (response) {
                 if (response.success) {
                 	FlashService.Success('Registro completo', true);
                     $location.path('/login');
                 } else {
-                    FlashService.Error("Registro Invalido");
+                    FlashService.Error("Registro Invalido. Correo no valido");
                     vm.dataLoading = false;
                 }
             });

@@ -76,18 +76,22 @@ public class RegistroUsuario extends HttpServlet {
 			String correo = obj.getString("email");
 			String passw = obj.getString("password");
 			
-			UsuarioDto usuario = new UsuarioDto();
-			usuario.setNombre(nombre);
-			usuario.setApellido(apellido);
-			usuario.setIdUsuario(correo);
-			usuario.setPassw(passw);
-			usuario.setRolUsuario("02");
-			
-			UsuarioDao usuarioDao = new UsuarioDao();
-			Boolean result = false;
-			result = usuarioDao.registroUsuario(usuario);
-//			System.out.println("Resultado:"+result.toString());
-			rta.put("success", true);
+			if (correo.contains("@")){
+				UsuarioDto usuario = new UsuarioDto();
+				usuario.setNombre(nombre);
+				usuario.setApellido(apellido);
+				usuario.setIdUsuario(correo);
+				usuario.setPassw(passw);
+				usuario.setRolUsuario("02");
+				
+				UsuarioDao usuarioDao = new UsuarioDao();
+				Boolean result = false;
+				result = usuarioDao.registroUsuario(usuario);
+//				System.out.println("Resultado:"+result.toString());
+				rta.put("success", true);
+			} else{
+				rta.put("success", false);
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

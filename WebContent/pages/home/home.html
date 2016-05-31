@@ -1,7 +1,17 @@
 <div id="calEmp" ng-app="HomeController">
-	    <p><h4>Hola {{vm.username}}!</h4>
-		<a href="#/login" class="btn btn-primary">Logout</a>
-		<a href="admin/admin.html" class="btn btn-primary">Admin</a></p>
+	<div>
+    <table >
+        <tr>
+           <td>
+				<div><h4>Hola {{vm.username}}!</h4></div>
+		   </td>
+           <td style="padding: 20px">		
+				<div><a href="#/login" class="btn btn-primary" style="text-align:rigth">Logout</a></div> 
+		   </td>
+        </tr>
+   </table>
+   </div>		
+	<div ng-show="adminButton"><a href="admin/admin.html" class="btn btn-primary">Admin</a></p></div>
     <div ng-controller="HomeController">
         <div kendo-scheduler k-options="schedulerOptions">
             <span k-event-template class='custom-event'>{{dataItem.title}}</span>
