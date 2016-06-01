@@ -98,10 +98,22 @@
         function createTask(data){
         	var start;
         	var end;
+        	var recurrence;
+        	var recurrenceException;
         	data[0].start =	Date.parse(data[0].start);
         	data[0].end =	Date.parse(data[0].end);
         	start = data[0].start + '';
         	end = data[0].end + '';
+        	if (data[0].recurrenceRule == null){
+        		recurrence = "null";
+        	}else{
+        		recurrence = data[0].recurrenceRule;
+        	}
+        	if(data[0].recurrenceException == null){
+        		recurrenceException = "null";
+        	}else{
+        		recurrenceException = data[0].recurrenceException;
+        	}
       	    $http({
       	    	method: 'POST',
 	      	    url: 'http://localhost:8080/TimeTracker/CRUDCalendar',
@@ -111,6 +123,8 @@
 	      	    		 title: data[0].title,
 	      	    		 start: start,
 	      	    		 end: end,
+	      	    		 recurrenceRule: recurrence,
+	      	    		 recurrenceException: recurrenceException,
 	      	    		 isAllDay: data[0].isAllDay,
 	      	    		 action: "create" }
 	      	  }).success(function (response){
@@ -125,11 +139,23 @@
         	var start;
         	var end;
         	var taskId;
+        	var recurrence;
+        	var recurrenceException;
         	data[0].start =	Date.parse(data[0].start);
         	data[0].end =	Date.parse(data[0].end);
         	start = data[0].start + '';
         	end = data[0].end + '';
         	taskId = data[0].taskID + '';
+        	if (data[0].recurrenceRule == null){
+        		recurrence = "null";
+        	}else{
+        		recurrence = data[0].recurrenceRule;
+        	}
+        	if(data[0].recurrenceException == null){
+        		recurrenceException = "null";
+        	}else{
+        		recurrenceException = data[0].recurrenceException;
+        	}
       	    $http({
       	    	method: 'POST',
 	      	    url: 'http://localhost:8080/TimeTracker/CRUDCalendar',
@@ -141,6 +167,8 @@
 	      	    		 start: start,
 	      	    		 end: end,
 	      	    		 isAllDay: data[0].isAllDay,
+	      	    		 recurrenceRule: recurrence,
+	      	    		 recurrenceException: recurrenceException,
 	      	    		 action: "update" }
 	      	  }).success(function (response){
 	      	      //response = { success: true };
@@ -153,11 +181,23 @@
         	var start;
         	var end;
         	var taskId;
+        	var recurrence;
+        	var recurrenceException;
         	data[0].start =	Date.parse(data[0].start);
         	data[0].end =	Date.parse(data[0].end);
         	start = data[0].start + '';
         	end = data[0].end + '';
         	taskId = data[0].taskID + '';
+        	if (data[0].recurrenceRule == null){
+        		recurrence = "null";
+        	}else{
+        		recurrence = data[0].recurrenceRule;
+        	}
+        	if(data[0].recurrenceException == null){
+        		recurrenceException = "null";
+        	}else{
+        		recurrenceException = data[0].recurrenceException;
+        	}
       	    $http({
       	    	method: 'POST',
 	      	    url: 'http://localhost:8080/TimeTracker/CRUDCalendar',
@@ -169,6 +209,8 @@
 	      	    		 start: start,
 	      	    		 end: end,
 	      	    		 isAllDay: data[0].isAllDay,
+	      	    		 recurrenceRule: recurrence,
+	      	    		 recurrenceException: recurrenceException,
 	      	    		 action: "destroy" }
 	      	  }).success(function (response){
 	      	      //response = { success: true };

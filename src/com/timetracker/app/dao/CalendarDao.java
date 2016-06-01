@@ -144,9 +144,9 @@ public class CalendarDao {
             
 			id = id + 1;
 			calendarDto.setTaskID(id);
-            String insert = "INSERT INTO calendar (usuario_id,TaskID,Title,Description,Start,End,IsAllDay) values ('"+
+            String insert = "INSERT INTO calendar (usuario_id,TaskID,Title,Description,Start,End,IsAllDay,RecurrenceRule) values ('"+
             		calendarDto.getUsuarioId()+"',"+calendarDto.getTaskID()+",'"+calendarDto.getTitle()+"','"+calendarDto.getDescription()+"','"+calendarDto.getStart()+"','"+
-            		calendarDto.getEnd()+"','"+calendarDto.getIsAllDay()+"');";
+            		calendarDto.getEnd()+"','"+calendarDto.getIsAllDay()+"','"+calendarDto.getRecurrenceRule()+"');";
             Statement sts = conex.getConnection().createStatement();
             sts.executeUpdate(insert);
 		}catch(SQLException e){
@@ -162,6 +162,7 @@ public class CalendarDao {
 
             String update = "Update calendar set Title='"+calendarDto.getTitle()+"',Description='"+calendarDto.getDescription()+
             		        "',Start='"+calendarDto.getStart()+"',End='"+calendarDto.getEnd()+"',IsAllDay='"+calendarDto.getIsAllDay()+
+            		        "' ,RecurrenceRule='"+calendarDto.getRecurrenceRule()+"',RecurrenceException='"+calendarDto.getRecurrenceException()+
             		        "' where usuario_id='"+calendarDto.getUsuarioId()+"' and TaskID="+calendarDto.getTaskID()+";";
             Statement sts = conex.getConnection().createStatement();
             sts.executeUpdate(update);

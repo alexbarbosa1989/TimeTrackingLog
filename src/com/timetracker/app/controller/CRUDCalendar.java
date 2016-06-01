@@ -83,6 +83,14 @@ public class CRUDCalendar extends HttpServlet {
 		String end = obj.getString("end");
 		Boolean isAllDay = obj.getBoolean("isAllDay");
 		Boolean result = false;
+		String recurrenceRule = null;
+		String recurrenceException = null;
+		if (!obj.getString("recurrenceRule").equalsIgnoreCase("null")){
+			recurrenceRule = obj.getString("recurrenceRule");
+		}
+		if (!obj.getString("recurrenceException").equalsIgnoreCase("null")){
+			recurrenceRule = obj.getString("recurrenceException");
+		}
 		
 		CalendarDto calendardto = new CalendarDto();
 		calendardto.setUsuarioId(usermail);
@@ -91,12 +99,14 @@ public class CRUDCalendar extends HttpServlet {
 		calendardto.setIsAllDay(isAllDay);
 		calendardto.setStart(start);
 		calendardto.setEnd(end);
+		calendardto.setRecurrenceRule(recurrenceRule);
 		
 		if (option.equalsIgnoreCase("create")){
 			result = calendarDao.setActivity(calendardto);
 		}else if(option.equalsIgnoreCase("update")){
 			Integer taskId = Integer.parseInt(obj.getString("taskId"));
 			calendardto.setTaskID(taskId);
+			calendardto.setRecurrenceException(recurrenceException);
 			result = calendarDao.setUpdateActivity(calendardto);
 		}else if(option.equalsIgnoreCase("destroy")){
 			Integer taskId = Integer.parseInt(obj.getString("taskId"));
