@@ -89,7 +89,7 @@ public class CRUDCalendar extends HttpServlet {
 			recurrenceRule = obj.getString("recurrenceRule");
 		}
 		if (!obj.getString("recurrenceException").equalsIgnoreCase("null")){
-			recurrenceRule = obj.getString("recurrenceException");
+			recurrenceException = obj.getString("recurrenceException");
 		}
 		
 		CalendarDto calendardto = new CalendarDto();
